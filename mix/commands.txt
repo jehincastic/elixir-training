@@ -1,0 +1,13 @@
+Mix is similar to npm
+
+mix new {project_name} -> To create a new mix project.
+
+mix compile -> To compile the project.
+
+mix deps.get -> To install all the dependencies from the dependencies section of mix.exs.
+
+Enviroments:
+  The current environment can be accessed using Mix.env
+  dev -> The default environment. [mix compile uses dev]
+  test -> Used by [mix test]
+  prod -> Used when we ship our application to production. [MIX_ENV=prod mix compile]
