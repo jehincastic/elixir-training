@@ -94,3 +94,16 @@ a = with {:ok, number} <- Map.fetch(m, :a),
 end
 
 IO.inspect a
+
+x = 1
+
+if true do
+  x = x + 1 # this does not update the value of x in the outer scope
+end
+
+# To update the value of x in the outer scope, we need to use this
+x = if true do
+  x + 1
+else
+  x
+end
