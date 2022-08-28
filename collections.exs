@@ -100,3 +100,26 @@ map = Map.delete(map, :foo) # => this can be used to delete keys from map
 IO.inspect map # => {:hello => "world", :abc => "baz"}
 IO.puts map[:a] # => nil
 # IO.puts map.a # => accessing atom key via . will throw an error if the key is not present
+
+users = [
+  john: %{name: "John", age: 27, languages: ["Erlang", "Ruby", "Elixir"]},
+  mary: %{name: "Mary", age: 29, languages: ["Elixir", "F#", "Clojure"]}
+]
+
+IO.puts "John's age is #{users[:john].age}" # => John's age is 27
+
+# IO.puts users[:john].ages # => this throws an error (beacuse the acces is based on Strict access)
+IO.puts users[:john][:ages] # => this returns nil (the brackets denotes Dynamic access)
+IO.puts users[:johns][:ages] # => this returns nil
+
+users = put_in(users[:john].age, 31) # => this can be used to update the value of the key
+IO.puts users[:john].age # => 31
+
+users = update_in(
+  users[:mary].languages,
+  fn languages ->
+    List.delete(languages, "Clojure")
+  end
+)
+
+IO.inspect users[:mary]
